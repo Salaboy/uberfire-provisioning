@@ -18,16 +18,12 @@ package org.uberfire.provisioning.pipeline;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
-import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@JsonTypeInfo( use = Id.CLASS, include = As.WRAPPER_OBJECT )
 public interface Pipeline {
 
     String getName();

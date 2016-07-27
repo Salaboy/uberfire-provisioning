@@ -15,7 +15,6 @@
  */
 package org.uberfire.provisioning.remote.client.test;
 
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.uberfire.provisioning.remote.client.RestClientRuntimeProvisioningService;
@@ -38,9 +37,9 @@ import org.uberfire.provisioning.local.runtime.provider.LocalRuntimeConfiguratio
 import org.uberfire.provisioning.openshift.runtime.provider.OpenshiftProviderConfBuilder;
 import org.uberfire.provisioning.openshift.runtime.provider.OpenshiftRuntimeConfBuilder;
 import org.uberfire.provisioning.runtime.RuntimeConfiguration;
-import org.uberfire.provisioning.runtime.providers.Provider;
 import org.uberfire.provisioning.runtime.providers.ProviderConfiguration;
-import org.uberfire.provisioning.runtime.providers.ProviderType;
+import org.uberfire.provisioning.services.api.itemlist.ProviderList;
+import org.uberfire.provisioning.services.api.itemlist.ProviderTypeList;
 import org.uberfire.provisioning.services.exceptions.BusinessException;
 import org.uberfire.provisioning.wildfly.runtime.provider.base.WildflyProviderConfBuilder;
 import org.uberfire.provisioning.wildfly.runtime.provider.base.WildflyRuntimeConfBuilder;
@@ -65,11 +64,11 @@ public class RestProvisioningCDITest {
     @Ignore // Need to deploy the services using arquillian to test the remote endpoints. 
     public void testProvisioningInjectionCDI() throws BusinessException {
 
-        List<ProviderType> allProviderTypes = provisioningService.getAllProviderTypes();
+        ProviderTypeList allProviderTypes = provisioningService.getAllProviderTypes();
 
-        assertEquals(4, allProviderTypes.size());
-        List<Provider> allProviders = provisioningService.getAllProviders();
-        assertEquals(0, allProviders.size());
+        assertEquals(4, allProviderTypes.getItems().size());
+        ProviderList allProviders = provisioningService.getAllProviders();
+        assertEquals(0, allProviders.getItems().size());
 
         ProviderConfiguration localConf = LocalProviderConfBuilder.newConfig("local runtime").get();
         provisioningService.registerProvider(localConf);
@@ -95,7 +94,7 @@ public class RestProvisioningCDITest {
         provisioningService.registerProvider(dockerConf);
         
         allProviders = provisioningService.getAllProviders();
-        assertEquals(4, allProviders.size());
+        assertEquals(4, allProviders.getItems().size());
         
         LocalRuntimeConfiguration localRuntimeConfig = LocalRuntimeConfBuilder.newConfig().setProviderName("local runtime")
                 .setJar( "../extras/sample-war/target/sample-war-1.0-SNAPSHOT-swarm.jar" )

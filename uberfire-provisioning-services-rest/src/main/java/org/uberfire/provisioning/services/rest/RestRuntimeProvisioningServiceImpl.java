@@ -17,7 +17,6 @@
 package org.uberfire.provisioning.services.rest;
 
 import java.lang.reflect.Constructor;
-import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,6 +39,9 @@ import org.uberfire.provisioning.runtime.providers.ProviderConfiguration;
 import org.uberfire.provisioning.runtime.providers.ProviderService;
 import org.uberfire.provisioning.runtime.providers.ProviderType;
 import org.uberfire.provisioning.services.api.RuntimeProvisioningService;
+import org.uberfire.provisioning.services.api.itemlist.ProviderList;
+import org.uberfire.provisioning.services.api.itemlist.ProviderTypeList;
+import org.uberfire.provisioning.services.api.itemlist.RuntimeList;
 import org.uberfire.provisioning.services.exceptions.BusinessException;
 import org.uberfire.provisioning.services.rest.factories.ProviderFactory;
 
@@ -72,13 +74,13 @@ public class RestRuntimeProvisioningServiceImpl implements RuntimeProvisioningSe
     }
 
     @Override
-    public List<ProviderType> getAllProviderTypes() throws BusinessException {
-        return registry.getAllProviderTypes();
+    public ProviderTypeList getAllProviderTypes() throws BusinessException {
+        return new ProviderTypeList(registry.getAllProviderTypes());
     }
 
     @Override
-    public List<Provider> getAllProviders() throws BusinessException {
-        return registry.getAllProviders();
+    public ProviderList getAllProviders() throws BusinessException {
+        return new ProviderList(registry.getAllProviders());
     }
 
     @Override
@@ -125,8 +127,8 @@ public class RestRuntimeProvisioningServiceImpl implements RuntimeProvisioningSe
     }
 
     @Override
-    public List<Runtime> getAllRuntimes() throws BusinessException {
-        return registry.getAllRuntimes();
+    public RuntimeList getAllRuntimes() throws BusinessException {
+        return new RuntimeList(registry.getAllRuntimes());
     }
 
     @Override

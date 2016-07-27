@@ -16,17 +16,12 @@
 
 package org.uberfire.provisioning.build;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.uberfire.java.nio.file.Path;
 
-import static com.fasterxml.jackson.annotation.JsonTypeInfo.As.*;
-import static com.fasterxml.jackson.annotation.JsonTypeInfo.Id.*;
 
 /**
- * @author salaboy
- *         Generic Project type to be used by the Build service.
+ * Generic Project type to be used by the Build service.
  */
-@JsonTypeInfo(use = CLASS, include = WRAPPER_OBJECT)
 public interface Project {
 
     String getId();

@@ -19,12 +19,10 @@ package org.uberfire.provisioning.runtime.base;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.uberfire.provisioning.runtime.RuntimeConfiguration;
 
 public class BaseRuntimeConfiguration implements RuntimeConfiguration {
 
-    @JsonIgnore
     private Map<String, String> properties = new HashMap<>();
 
     private String providerName;

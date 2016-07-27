@@ -15,7 +15,6 @@
  */
 package org.uberfire.provisioning.remote.client;
 
-import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import javax.ws.rs.client.Client;
@@ -23,12 +22,12 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
-import org.uberfire.provisioning.runtime.Runtime;
 import org.uberfire.provisioning.runtime.RuntimeConfiguration;
-import org.uberfire.provisioning.runtime.providers.Provider;
 import org.uberfire.provisioning.runtime.providers.ProviderConfiguration;
-import org.uberfire.provisioning.runtime.providers.ProviderType;
 import org.uberfire.provisioning.services.api.RuntimeProvisioningService;
+import org.uberfire.provisioning.services.api.itemlist.ProviderList;
+import org.uberfire.provisioning.services.api.itemlist.ProviderTypeList;
+import org.uberfire.provisioning.services.api.itemlist.RuntimeList;
 import org.uberfire.provisioning.services.exceptions.BusinessException;
 
 @ApplicationScoped
@@ -45,12 +44,12 @@ public class RestClientRuntimeProvisioningService implements RuntimeProvisioning
     }
     
     @Override
-    public List<ProviderType> getAllProviderTypes() throws BusinessException {
+    public ProviderTypeList getAllProviderTypes() throws BusinessException {
         return remoteService.getAllProviderTypes();
     }
     
     @Override
-    public List<Provider> getAllProviders() throws BusinessException {
+    public ProviderList getAllProviders() throws BusinessException {
         return remoteService.getAllProviders();
     }
     
@@ -76,7 +75,7 @@ public class RestClientRuntimeProvisioningService implements RuntimeProvisioning
     }
     
     @Override
-    public List<Runtime> getAllRuntimes() throws BusinessException {
+    public RuntimeList getAllRuntimes() throws BusinessException {
         return remoteService.getAllRuntimes();
     }
     

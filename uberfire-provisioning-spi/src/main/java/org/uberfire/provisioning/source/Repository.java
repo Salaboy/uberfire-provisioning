@@ -16,16 +16,10 @@
 
 package org.uberfire.provisioning.source;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-
-import static com.fasterxml.jackson.annotation.JsonTypeInfo.As.*;
-import static com.fasterxml.jackson.annotation.JsonTypeInfo.Id.*;
-
 /**
- * @author salaboy
- *         Type to represent a Source Code Repository
+ *
+ * Type to represent a Source Code Repository
  */
-@JsonTypeInfo(use = CLASS, include = WRAPPER_OBJECT)
 public interface Repository {
 
     String getId();
@@ -41,7 +35,7 @@ public interface Repository {
     * @param repository a source code Repository to use as Source for our projects
     * @return a String with the path to the retrieved source code
     * @see Repository
-    */
+     */
     Source getSource( final String root,
-                      final String... path );
+            final String... path );
 }

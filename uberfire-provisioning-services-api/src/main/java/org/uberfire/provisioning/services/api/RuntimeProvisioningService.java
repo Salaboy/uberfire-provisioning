@@ -16,7 +16,6 @@
 
 package org.uberfire.provisioning.services.api;
 
-import java.util.List;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -27,14 +26,14 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 
-import org.uberfire.provisioning.runtime.Runtime;
 import org.uberfire.provisioning.runtime.RuntimeConfiguration;
-import org.uberfire.provisioning.runtime.providers.Provider;
 import org.uberfire.provisioning.runtime.providers.ProviderConfiguration;
-import org.uberfire.provisioning.runtime.providers.ProviderType;
 import org.uberfire.provisioning.services.exceptions.BusinessException;
 
 import static javax.ws.rs.core.MediaType.*;
+import org.uberfire.provisioning.services.api.itemlist.ProviderList;
+import org.uberfire.provisioning.services.api.itemlist.ProviderTypeList;
+import org.uberfire.provisioning.services.api.itemlist.RuntimeList;
 
 @Path("runtime")
 public interface RuntimeProvisioningService {
@@ -43,12 +42,12 @@ public interface RuntimeProvisioningService {
     @Consumes(value = APPLICATION_JSON)
     @Produces(value = APPLICATION_JSON)
     @Path("providertypes")
-    List<ProviderType> getAllProviderTypes() throws BusinessException;
+    ProviderTypeList getAllProviderTypes() throws BusinessException;
 
     @GET
     @Produces(value = APPLICATION_JSON)
     @Path("providers")
-    List<Provider> getAllProviders() throws BusinessException;
+    ProviderList getAllProviders() throws BusinessException;
 
     @POST
     @Consumes(value = APPLICATION_JSON)
@@ -71,7 +70,7 @@ public interface RuntimeProvisioningService {
     @GET
     @Produces(value = APPLICATION_JSON)
     @Path("runtimes/")
-    List<Runtime> getAllRuntimes() throws BusinessException;
+    RuntimeList getAllRuntimes() throws BusinessException;
 
 
     @POST

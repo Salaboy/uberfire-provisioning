@@ -16,21 +16,16 @@
 
 package org.uberfire.provisioning.runtime;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-
-import static com.fasterxml.jackson.annotation.JsonTypeInfo.As.*;
-import static com.fasterxml.jackson.annotation.JsonTypeInfo.Id.*;
 import org.uberfire.provisioning.runtime.providers.Provider;
 
 /**
- * @author salaboy
  * <p>
  * This class represent a Runtime (Docker Image running or a WAR deployed into a
  * server)
  * It also allows you to interact with the runtime state executing operations
  * such as start, stop, restart
  */
-@JsonTypeInfo( use = CLASS, include = WRAPPER_OBJECT )
+
 public interface Runtime {
 
     String getId();

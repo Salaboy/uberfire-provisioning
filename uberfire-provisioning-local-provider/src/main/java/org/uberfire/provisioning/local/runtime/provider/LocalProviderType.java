@@ -25,7 +25,13 @@ import org.uberfire.provisioning.runtime.providers.base.BaseProviderType;
 public class LocalProviderType extends BaseProviderType {
 
     public LocalProviderType() {
-        super( "local", "1.0", LocalProvider.class, LocalProviderService.class );
+        super( "local", "1.0", LocalProvider.class, LocalProviderService.class, LocalRuntimeService.class );
     }
+
+    public LocalProviderType( String providerName, String version, Class provider, Class providerService, Class runtimeService ) {
+        super( providerName, version, provider, providerService, runtimeService );
+    }
+    
+    
 
 }

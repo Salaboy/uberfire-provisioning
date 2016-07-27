@@ -19,24 +19,25 @@ import org.uberfire.provisioning.runtime.providers.ProviderType;
 
 public abstract class BaseProviderType implements ProviderType {
 
-    private String providerName;
-    private String version;
-    private Class provider;
-    private Class providerService;
-    private Class runtimeService;
+    protected String providerTypeName;
+    protected String version;
+    protected Class provider;
+    protected Class providerService;
+    protected Class runtimeService;
 
     public BaseProviderType( String providerName,
             String version,
-            Class provider, Class providerService ) {
-        this.providerName = providerName;
+            Class provider, Class providerService, Class runtimeService ) {
+        this.providerTypeName = providerName;
         this.version = version;
         this.provider = provider;
         this.providerService = providerService;
+        this.runtimeService = runtimeService;
     }
 
     @Override
     public String getProviderTypeName() {
-        return providerName;
+        return providerTypeName;
     }
 
     @Override
@@ -51,7 +52,7 @@ public abstract class BaseProviderType implements ProviderType {
 
     @Override
     public void setProviderTypeName( String providerName ) {
-        this.providerName = providerName;
+        this.providerTypeName = providerName;
     }
 
     @Override
@@ -86,7 +87,7 @@ public abstract class BaseProviderType implements ProviderType {
 
     @Override
     public String toString() {
-        return "BaseProviderType{" + "providerName=" + providerName + ", version=" + version + ", provider=" + provider + ", providerService=" + providerService + ", runtimeService=" + runtimeService + '}';
+        return "BaseProviderType{" + "providerTypeName=" + providerTypeName + ", version=" + version + ", provider=" + provider + ", providerService=" + providerService + ", runtimeService=" + runtimeService + '}';
     }
 
 }

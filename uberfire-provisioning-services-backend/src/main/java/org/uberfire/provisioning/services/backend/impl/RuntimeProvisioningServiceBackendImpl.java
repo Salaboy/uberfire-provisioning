@@ -46,12 +46,12 @@ public class RuntimeProvisioningServiceBackendImpl implements RuntimeProvisionin
 
     @Override
     public List<ProviderType> getAllProviderTypes() throws BusinessException {
-        return runtimeProvisioningService.getAllProviderTypes();
+        return runtimeProvisioningService.getAllProviderTypes().getItems();
     }
 
     @Override
     public List<Provider> getAllProviders() throws BusinessException {
-        return runtimeProvisioningService.getAllProviders();
+        return runtimeProvisioningService.getAllProviders().getItems();
     }
 
     @Override
@@ -71,7 +71,7 @@ public class RuntimeProvisioningServiceBackendImpl implements RuntimeProvisionin
 
     @Override
     public List<Runtime> getAllRuntimes() throws BusinessException {
-        return runtimeProvisioningService.getAllRuntimes();
+        return runtimeProvisioningService.getAllRuntimes().getItems();
     }
 
     @Override

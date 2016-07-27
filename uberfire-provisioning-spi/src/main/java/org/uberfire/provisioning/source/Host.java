@@ -18,13 +18,8 @@ package org.uberfire.provisioning.source;
 
 import java.util.Map;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.uberfire.provisioning.security.Credentials;
 
-import static com.fasterxml.jackson.annotation.JsonTypeInfo.As.*;
-import static com.fasterxml.jackson.annotation.JsonTypeInfo.Id.*;
-
-@JsonTypeInfo(use = CLASS, include = WRAPPER_OBJECT)
 public interface Host<C extends Credentials> {
 
     String getId();
@@ -34,10 +29,10 @@ public interface Host<C extends Credentials> {
     Repository getRepository( final String id );
 
     Repository getRepository( final String id,
-                              final Map<String, String> config );
+            final Map<String, String> config );
 
     Repository getRepository( final C credential,
-                              final String repositoryId,
-                              final Map<String, String> config );
+            final String repositoryId,
+            final Map<String, String> config );
 
 }

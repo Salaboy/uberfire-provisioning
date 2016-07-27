@@ -19,13 +19,19 @@ package org.uberfire.provisioning.wildfly.runtime.provider.wildly10;
 import javax.enterprise.context.ApplicationScoped;
 
 import org.uberfire.provisioning.runtime.providers.base.BaseProviderType;
+import org.uberfire.provisioning.wildfly.runtime.provider.base.WildflyRuntimeService;
 
 @ApplicationScoped
 @Wildfly10
 public class Wildfly10ProviderType extends BaseProviderType {
 
     public Wildfly10ProviderType() {
-        super( "wildfly", "10.0.0", Wildfly10Provider.class, Wildfly10ProviderService.class );
+        super( "wildfly", "10.0.0", Wildfly10Provider.class, Wildfly10ProviderService.class, WildflyRuntimeService.class );
     }
 
+    public Wildfly10ProviderType( String providerName, String version, Class provider, Class providerService, Class runtimeService ) {
+        super( providerName, version, provider, providerService, runtimeService );
+    }
+
+    
 }

@@ -16,13 +16,8 @@
 
 package org.uberfire.provisioning.pipeline;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-
-import static com.fasterxml.jackson.annotation.JsonTypeInfo.As.*;
-import static com.fasterxml.jackson.annotation.JsonTypeInfo.Id.*;
 import java.util.Set;
 
-@JsonTypeInfo( use = CLASS, include = WRAPPER_OBJECT )
 public interface Stage {
 
     String getName();

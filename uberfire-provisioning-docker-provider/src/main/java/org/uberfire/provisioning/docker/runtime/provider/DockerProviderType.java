@@ -20,15 +20,18 @@ import javax.enterprise.context.ApplicationScoped;
 
 import org.uberfire.provisioning.runtime.providers.base.BaseProviderType;
 
-/**
- * @author salaboy
- */
+
 @ApplicationScoped
 @Docker
 public class DockerProviderType extends BaseProviderType {
 
     public DockerProviderType() {
-        super( "docker", "1.9.1", DockerProvider.class, DockerProviderService.class );
+        super( "docker", "1.9.1", DockerProvider.class, DockerProviderService.class, DockerRuntimeService.class );
     }
 
+    public DockerProviderType( String providerName, String version, Class provider, Class providerService, Class runtimeService ) {
+        super( providerName, version, provider, providerService, runtimeService );
+    }
+
+    
 }

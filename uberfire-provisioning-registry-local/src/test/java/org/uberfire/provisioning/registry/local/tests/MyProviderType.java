@@ -22,9 +22,14 @@ public class MyProviderType extends BaseProviderType {
 
     public MyProviderType( String providerName,
             String version ) {
-        super( providerName, version, MyProvider.class, MyProviderService.class );
+        super( providerName, version, MyProvider.class, MyProviderService.class , MyRuntimeService.class);
     }
 
+    public MyProviderType( String providerName, String version, Class provider, Class providerService, Class runtimeService ) {
+        super( providerName, version, provider, providerService, runtimeService );
+    }
+
+    
     public MyProviderType() {
         this( "my provider", "1.0" );
     }

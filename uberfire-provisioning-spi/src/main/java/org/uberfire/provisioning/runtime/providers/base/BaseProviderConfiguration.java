@@ -19,15 +19,10 @@ package org.uberfire.provisioning.runtime.providers.base;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.uberfire.provisioning.runtime.providers.ProviderConfiguration;
 
-/**
- * @author salaboy
- */
 public class BaseProviderConfiguration implements ProviderConfiguration {
 
-    @JsonIgnore
     private Map<String, String> properties = new HashMap<>();
 
     private String name;
@@ -36,12 +31,12 @@ public class BaseProviderConfiguration implements ProviderConfiguration {
     /*
      * This constructor is here to be able to use this class setting the properties 
      * directly, mostly used by the remote endpoints for flexiblity.
-    */
+     */
     public BaseProviderConfiguration() {
     }
 
     public BaseProviderConfiguration( String name,
-                                      String provider ) {
+            String provider ) {
         this.name = name;
         this.provider = provider;
     }

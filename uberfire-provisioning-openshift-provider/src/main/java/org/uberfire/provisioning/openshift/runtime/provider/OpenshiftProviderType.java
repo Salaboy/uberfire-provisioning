@@ -25,7 +25,12 @@ import org.uberfire.provisioning.runtime.providers.base.BaseProviderType;
 public class OpenshiftProviderType extends BaseProviderType {
 
     public OpenshiftProviderType() {
-        super( "openshift", "1", OpenshiftProvider.class, OpenshiftProviderService.class );
+        super( "openshift", "1", OpenshiftProvider.class, OpenshiftProviderService.class, OpenshiftRuntimeService.class );
     }
+
+    public OpenshiftProviderType( String providerName, String version, Class provider, Class providerService, Class runtimeService ) {
+        super( providerName, version, provider, providerService, runtimeService );
+    }
+    
 
 }
