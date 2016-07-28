@@ -23,5 +23,5 @@ public interface ProviderService {
 
     org.uberfire.provisioning.runtime.Runtime create( RuntimeConfiguration config ) throws ProvisioningException;
 
-    void destroy( String runtimeId ) throws ProvisioningException;
+    boolean destroy( String runtimeId ) throws ProvisioningException;
 }

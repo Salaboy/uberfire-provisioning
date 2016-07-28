@@ -23,10 +23,6 @@ import javax.inject.Inject;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -71,24 +67,6 @@ public class OpenshiftProviderRuntimeTest {
     @Any
     private Instance<ProviderType> providerTypes;
 
-    public OpenshiftProviderRuntimeTest() {
-    }
-
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
-    }
-
-    @Before
-    public void setUp() {
-    }
-
-    @After
-    public void tearDown() {
-    }
 
     @Test
     public void providerTypeRegisteredTest() {
@@ -104,14 +82,14 @@ public class OpenshiftProviderRuntimeTest {
 
     @Test
     public void newOpenshiftProviderWithoutOpenshiftClientSetupTest() {
-        ProviderType dockerProviderType = providerTypes.iterator().next();
+        ProviderType openshiftProviderType = providerTypes.iterator().next();
         OpenshiftProviderConfiguration config = new OpenshiftProviderConfiguration( "openshift" );
 
-        OpenshiftProvider kubernetesProvider = new OpenshiftProvider( config, dockerProviderType );
+        OpenshiftProvider openshiftProvider = new OpenshiftProvider( config, openshiftProviderType );
 
-        OpenshiftProviderService kubernetesProviderService = new OpenshiftProviderService( kubernetesProvider );
+        OpenshiftProviderService openshiftProviderService = new OpenshiftProviderService( openshiftProvider );
 
-        assertNotNull( kubernetesProviderService.getKubernetesClient() );
+        assertNotNull( openshiftProviderService.getKubernetesClient() );
         OpenshiftRuntimeConfiguration runtimeConfig = new OpenshiftRuntimeConfiguration();
         runtimeConfig.setNamespace( "default" );
         runtimeConfig.setReplicationController( "test" );
@@ -123,10 +101,10 @@ public class OpenshiftProviderRuntimeTest {
         Runtime newRuntime;
 
         try {
-            newRuntime = kubernetesProviderService.create( runtimeConfig );
+            newRuntime = openshiftProviderService.create( runtimeConfig );
         } catch ( Exception ex ) {
             ex.printStackTrace();
-            // If the kubernetes  is not running and the system variables for locating the
+            // If openshift  is not running and the system variables for locating the
             //   kubernetes deamon are not set, this is expected to fail.
             // If you are openshift origin you need to be logged in with the remote client
             //  for the kubernetes-api to pick up your configuration

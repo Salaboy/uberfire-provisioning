@@ -25,12 +25,12 @@ import org.uberfire.provisioning.runtime.providers.Provider;
 
 public abstract class BaseRuntime implements Runtime {
 
-    private String id;
+    protected String id;
     protected RuntimeConfiguration config;
-    private RuntimeInfo info;
-    private RuntimeState state;
-    private RuntimeEndpoint endpoint;
-    private Provider provider;
+    protected RuntimeInfo info;
+    protected RuntimeState state;
+    protected RuntimeEndpoint endpoint;
+    protected Provider provider;
 
     public BaseRuntime() {
     }

@@ -14,23 +14,20 @@
  * limitations under the License.
  */
 
-package org.uberfire.provisioning.local.runtime.provider;
+package org.uberfire.provisioning.mock;
 
-public class LocalProviderConfBuilder {
+import org.uberfire.provisioning.runtime.RuntimeConfiguration;
+import org.uberfire.provisioning.runtime.base.BaseRuntime;
+import org.uberfire.provisioning.runtime.providers.Provider;
 
-    private static LocalProviderConfBuilder instance;
-    private static LocalProviderConfiguration config;
+public class MockRuntime extends BaseRuntime {
 
-    private LocalProviderConfBuilder() {
+    public MockRuntime() {
     }
 
-    public static LocalProviderConfBuilder newConfig( String providerName ) {
-        instance = new LocalProviderConfBuilder();
-        config = new LocalProviderConfiguration( providerName );
-        return instance;
+    public MockRuntime( String id, RuntimeConfiguration config, Provider provider ) {
+        super( id, config, provider );
+        this.info = new MockRuntimeInfo( id, ( ( MockRuntimeConfiguration ) config ).getMockRuntimeProperty(), config );
     }
 
-    public LocalProviderConfiguration get() {
-        return config;
-    }
 }

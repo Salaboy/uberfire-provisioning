@@ -37,7 +37,7 @@ public class LocalProviderService implements ProviderService {
     }
 
     @Override
-    public void destroy( String runtimeId ) throws ProvisioningException {
-
+    public boolean destroy( String runtimeId ) throws ProvisioningException {
+        return true;
     }
 }

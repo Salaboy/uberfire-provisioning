@@ -23,10 +23,6 @@ import javax.inject.Inject;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.uberfire.provisioning.exceptions.ProvisioningException;
@@ -38,7 +34,6 @@ import org.uberfire.provisioning.local.runtime.provider.LocalRuntimeConfiguratio
 import org.uberfire.provisioning.runtime.Runtime;
 import org.uberfire.provisioning.runtime.providers.ProviderType;
 
-import static java.lang.System.*;
 import static java.lang.Thread.*;
 import static org.jboss.shrinkwrap.api.ShrinkWrap.*;
 import static org.jboss.shrinkwrap.api.asset.EmptyAsset.*;
@@ -47,9 +42,6 @@ import org.uberfire.provisioning.local.runtime.provider.LocalProviderService;
 import org.uberfire.provisioning.local.runtime.provider.LocalRuntimeService;
 import org.uberfire.provisioning.runtime.providers.ProviderService;
 
-/**
- * @author salaboy
- */
 @RunWith( Arquillian.class )
 public class LocalProviderRuntimeTest {
 
@@ -61,32 +53,13 @@ public class LocalProviderRuntimeTest {
                 .addClass( LocalProvider.class )
                 .addClass( LocalRuntime.class )
                 .addAsManifestResource( INSTANCE, "beans.xml" );
-        out.println( jar.toString( true ) );
+//        out.println( jar.toString( true ) );
         return jar;
     }
 
     @Inject
     @Any
     private Instance<ProviderType> providerTypes;
-
-    public LocalProviderRuntimeTest() {
-    }
-
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
-    }
-
-    @Before
-    public void setUp() {
-    }
-
-    @After
-    public void tearDown() {
-    }
 
     @Test
     public void providerTypeRegisteredTest() {

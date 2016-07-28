@@ -27,7 +27,6 @@ public class Wildfly10Provider extends BaseProvider {
 
     public Wildfly10Provider( ProviderConfiguration config ) {
         this( config, new Wildfly10ProviderType() );
-
     }
 
     public Wildfly10Provider( ProviderConfiguration config,

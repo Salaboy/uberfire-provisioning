@@ -21,9 +21,6 @@ import org.uberfire.provisioning.runtime.providers.ProviderType;
 import org.uberfire.provisioning.runtime.providers.base.BaseProvider;
 
 
-/**
- * @author salaboy
- */
 public class LocalProvider extends BaseProvider {
 
     public LocalProvider() {

@@ -106,10 +106,11 @@ public class DockerProviderService implements ProviderService {
     }
 
     @Override
-    public void destroy( String runtimeId ) throws ProvisioningException {
+    public boolean destroy( String runtimeId ) throws ProvisioningException {
         try {
             docker.killContainer( runtimeId );
             docker.removeContainer( runtimeId );
+            return true;
         } catch ( DockerException | InterruptedException ex ) {
             Logger.getLogger( DockerProvider.class.getName() ).log( Level.SEVERE, null, ex );
             throw new ProvisioningException( "Error destroying Docker Runtime: " + ex.getMessage() );

@@ -65,8 +65,8 @@ public class Wildfly10ProviderService implements ProviderService {
     }
 
     @Override
-    public void destroy( String runtimeId ) throws ProvisioningException {
-        throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    public boolean destroy( String runtimeId ) throws ProvisioningException {
+        return true; 
     }
 
     public Wildfly10RemoteClient getWildfly() {

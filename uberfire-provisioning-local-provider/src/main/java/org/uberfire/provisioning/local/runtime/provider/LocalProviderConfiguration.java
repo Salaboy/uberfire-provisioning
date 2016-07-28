@@ -18,9 +18,6 @@ package org.uberfire.provisioning.local.runtime.provider;
 
 import org.uberfire.provisioning.runtime.providers.base.BaseProviderConfiguration;
 
-/**
- * @author salaboy
- */
 public class LocalProviderConfiguration extends BaseProviderConfiguration {
 
     /*

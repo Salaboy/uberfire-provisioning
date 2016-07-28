@@ -150,7 +150,7 @@ public class OpenshiftProviderService implements ProviderService {
     }
 
     @Override
-    public void destroy( String runtimeId ) throws ProvisioningException {
+    public boolean destroy( String runtimeId ) throws ProvisioningException {
         System.out.println( ">>> Runtime ID Recieved: " + runtimeId );
         ClientRollableScallableResource<ReplicationController, DoneableReplicationController> rcResource = kubernetes
                 .replicationControllers()
@@ -188,7 +188,9 @@ public class OpenshiftProviderService implements ProviderService {
             } else {
                 rcResource.scale( replicas - 1 );
             }
+            return true;
         }
+        return false;
 
     }
 

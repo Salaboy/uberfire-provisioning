@@ -11,24 +11,17 @@ import org.uberfire.provisioning.runtime.providers.base.BaseProvider;
 
 public class DockerProvider extends BaseProvider {
 
-    
-    
-
     public DockerProvider() {
     }
-    
+
     public DockerProvider( ProviderConfiguration config ) {
         this( config, new DockerProviderType() );
     }
 
     public DockerProvider( ProviderConfiguration config,
-                           ProviderType type ) {
+            ProviderType type ) {
         super( config.getName(), type );
         this.config = config;
-        
-
     }
-
-    
 
 }
