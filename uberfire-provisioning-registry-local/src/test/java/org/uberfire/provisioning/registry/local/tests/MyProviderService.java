@@ -28,7 +28,7 @@ public class MyProviderService implements ProviderService {
     }
 
     @Override
-    public void destroy( String runtimeId ) throws ProvisioningException {
+    public boolean destroy( String runtimeId ) throws ProvisioningException {
         throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
     }
 
