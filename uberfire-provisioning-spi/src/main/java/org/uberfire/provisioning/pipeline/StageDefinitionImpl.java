@@ -16,13 +16,11 @@
 
 package org.uberfire.provisioning.pipeline;
 
-import org.uberfire.provisioning.pipeline.StageDefinition;
-
 public class StageDefinitionImpl implements StageDefinition {
 
-    private String name;
+    protected String name;
 
-    private Class type;
+    protected Class type;
 
     public StageDefinitionImpl() {
     }

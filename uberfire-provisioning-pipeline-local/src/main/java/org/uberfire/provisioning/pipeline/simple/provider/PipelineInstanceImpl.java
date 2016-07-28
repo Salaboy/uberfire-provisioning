@@ -100,10 +100,12 @@ public class PipelineInstanceImpl implements PipelineInstance {
     }
 
     private boolean checkRegisteredService() {
-        for ( Class type : pipeline.getRequiredServices() ) {
-            if ( services.get( type ) == null ) {
-                System.out.println( "Error: The Service type: " + type + " is required and it is not registered" );
-                return false;
+        if ( pipeline.getRequiredServices() != null ) {
+            for ( Class type : pipeline.getRequiredServices() ) {
+                if ( services.get( type ) == null ) {
+                    System.out.println( "Error: The Service type: " + type + " is required and it is not registered" );
+                    return false;
+                }
             }
         }
         return true;

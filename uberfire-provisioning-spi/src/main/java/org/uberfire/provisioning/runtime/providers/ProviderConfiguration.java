@@ -16,8 +16,12 @@
 
 package org.uberfire.provisioning.runtime.providers;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import static com.fasterxml.jackson.annotation.JsonTypeInfo.As.WRAPPER_OBJECT;
+import static com.fasterxml.jackson.annotation.JsonTypeInfo.Id.CLASS;
 import java.util.Map;
 
+@JsonTypeInfo( use = CLASS, include = WRAPPER_OBJECT )
 public interface ProviderConfiguration {
 
     Map<String, String> getProperties();

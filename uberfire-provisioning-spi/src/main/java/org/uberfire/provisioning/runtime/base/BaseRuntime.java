@@ -32,6 +32,9 @@ public abstract class BaseRuntime implements Runtime {
     private RuntimeEndpoint endpoint;
     private Provider provider;
 
+    public BaseRuntime() {
+    }
+    
     public BaseRuntime( String id,
             RuntimeConfiguration config, Provider provider ) {
         this.id = id;

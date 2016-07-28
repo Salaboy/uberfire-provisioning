@@ -16,9 +16,6 @@
 
 package org.uberfire.provisioning.local.runtime.provider;
 
-/**
- * @author salaboy
- */
 public class LocalRuntimeConfBuilder {
 
     private static LocalRuntimeConfBuilder instance;

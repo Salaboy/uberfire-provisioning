@@ -16,7 +16,6 @@
 
 package org.uberfire.provisioning.services.rest;
 
-import java.util.List;
 import java.util.UUID;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
@@ -32,6 +31,9 @@ import org.uberfire.provisioning.services.exceptions.BusinessException;
 import org.uberfire.provisioning.pipeline.Pipeline;
 import org.uberfire.provisioning.pipeline.PipelineInstance;
 import org.uberfire.provisioning.pipeline.PipelineDataContext;
+import org.uberfire.provisioning.pipeline.PipelineTemplate;
+import org.uberfire.provisioning.services.api.itemlist.PipelineList;
+import org.uberfire.provisioning.services.api.itemlist.PipelineTemplateList;
 
 @ApplicationScoped
 public class RestPipelineServiceImpl implements PipelineService {
@@ -42,8 +44,6 @@ public class RestPipelineServiceImpl implements PipelineService {
     @Inject
     @Any
     private Instance<PipelineEventHandler> eventHandlers;
-    
-    
 
     @PostConstruct
     public void init() {
@@ -51,8 +51,8 @@ public class RestPipelineServiceImpl implements PipelineService {
     }
 
     @Override
-    public List<Pipeline> getAllPipelines() throws BusinessException {
-        return pipelineRegistry.getAllPipelines();
+    public PipelineList getAllPipelines() throws BusinessException {
+        return new PipelineList(pipelineRegistry.getAllPipelines());
     }
 
     @Override
@@ -73,6 +73,21 @@ public class RestPipelineServiceImpl implements PipelineService {
         }
         PipelineDataContext results = newPipelineInstance.execute();
         
+    }
+
+    @Override
+    public void registerPipelineTemplate( PipelineTemplate template ) throws BusinessException {
+        pipelineRegistry.registerTemplate( template );
+    }
+
+    @Override
+    public PipelineTemplateList getAllPipelineTemplates() throws BusinessException {
+        return new PipelineTemplateList(pipelineRegistry.getAllTemplates());
+    }
+
+    @Override
+    public PipelineTemplate getPipelineTemplateById( String id ) throws BusinessException {
+        return pipelineRegistry.getTemplateByName( id );
     }
 
 }

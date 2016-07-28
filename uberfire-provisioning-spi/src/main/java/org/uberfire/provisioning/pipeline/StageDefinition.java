@@ -16,6 +16,11 @@
 
 package org.uberfire.provisioning.pipeline;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import static com.fasterxml.jackson.annotation.JsonTypeInfo.As.WRAPPER_OBJECT;
+import static com.fasterxml.jackson.annotation.JsonTypeInfo.Id.CLASS;
+
+@JsonTypeInfo( use = CLASS, include = WRAPPER_OBJECT )
 public interface StageDefinition {
 
     String getName();

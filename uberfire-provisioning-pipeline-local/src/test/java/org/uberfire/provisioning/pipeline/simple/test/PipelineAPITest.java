@@ -77,6 +77,22 @@ public class PipelineAPITest {
     }
 
     @Test
+    public void pipelineWithNoRequiredService(){
+        Pipeline np = Pipeline.builder()
+                .newPipeline( "my pipe" )
+                .newStage( PrintOutStage.builder().withName( "my stage" )
+                        .withMessage( "my message" ).outMessage( "result" ).build() )
+                .newStage( PrintOutStage2.builder().withName( "my stage 2" ).withMessage( "${result}" ).outMessage( "result2" ).build() )
+                .build();
+        
+        PipelineInstanceImpl instance = new PipelineInstanceImpl( np );
+        PipelineDataContext results = instance.execute();
+        String result1 = ( String ) results.getData( "${result}" );
+        assertEquals( "my message-v2", result1 );
+        
+    }
+    
+    @Test
     public void templateTest() {
         PipelineTemplate template = PipelineTemplate.builder()
                 .newTemplate( "My template" )

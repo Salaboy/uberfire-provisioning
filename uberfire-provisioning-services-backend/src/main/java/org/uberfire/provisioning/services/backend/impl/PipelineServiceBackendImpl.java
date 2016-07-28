@@ -43,7 +43,7 @@ public class PipelineServiceBackendImpl implements PipelineServiceBackend {
 
     @Override
     public List<Pipeline> getAllPipelines() throws BusinessException {
-        return pipelineService.getAllPipelines();
+        return pipelineService.getAllPipelines().getItems();
     }
 
     @Override

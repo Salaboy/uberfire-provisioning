@@ -21,6 +21,9 @@ import org.uberfire.provisioning.runtime.base.BaseRuntime;
 
 public class DockerRuntime extends BaseRuntime {
 
+    public DockerRuntime() {
+    }
+    
     public DockerRuntime( String id, RuntimeConfiguration config, 
             DockerProvider provider ) {
         super( id, config, provider );

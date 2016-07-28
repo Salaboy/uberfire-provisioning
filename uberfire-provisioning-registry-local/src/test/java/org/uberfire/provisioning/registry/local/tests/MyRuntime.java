@@ -23,10 +23,10 @@ import org.uberfire.provisioning.runtime.RuntimeState;
 import org.uberfire.provisioning.runtime.base.BaseRuntime;
 import org.uberfire.provisioning.runtime.providers.Provider;
 
-/**
- * @author salaboy
- */
 public class MyRuntime extends BaseRuntime {
+
+    public MyRuntime() {
+    }
 
     public MyRuntime( String id,
             RuntimeConfiguration config,

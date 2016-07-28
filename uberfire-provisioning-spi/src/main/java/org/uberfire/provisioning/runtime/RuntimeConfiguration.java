@@ -16,6 +16,9 @@
 
 package org.uberfire.provisioning.runtime;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import static com.fasterxml.jackson.annotation.JsonTypeInfo.As.WRAPPER_OBJECT;
+import static com.fasterxml.jackson.annotation.JsonTypeInfo.Id.CLASS;
 import java.util.Map;
 
 
@@ -23,6 +26,7 @@ import java.util.Map;
  * This class holds all the information about configuration used
  *         to start a specific runtime
  */
+@JsonTypeInfo( use = CLASS, include = WRAPPER_OBJECT )
 public interface RuntimeConfiguration {
 
     String getProviderName();

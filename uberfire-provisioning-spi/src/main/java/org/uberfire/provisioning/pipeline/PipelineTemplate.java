@@ -16,11 +16,15 @@
 
 package org.uberfire.provisioning.pipeline;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import static com.fasterxml.jackson.annotation.JsonTypeInfo.As.WRAPPER_OBJECT;
+import static com.fasterxml.jackson.annotation.JsonTypeInfo.Id.CLASS;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+@JsonTypeInfo( use = CLASS, include = WRAPPER_OBJECT )
 public interface PipelineTemplate {
 
     void setName( String name );

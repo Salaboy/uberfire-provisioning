@@ -16,6 +16,9 @@
 
 package org.uberfire.provisioning.runtime;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import static com.fasterxml.jackson.annotation.JsonTypeInfo.As.WRAPPER_OBJECT;
+import static com.fasterxml.jackson.annotation.JsonTypeInfo.Id.CLASS;
 import org.uberfire.provisioning.runtime.providers.Provider;
 
 /**
@@ -26,6 +29,7 @@ import org.uberfire.provisioning.runtime.providers.Provider;
  * such as start, stop, restart
  */
 
+@JsonTypeInfo( use = CLASS, include = WRAPPER_OBJECT )
 public interface Runtime {
 
     String getId();

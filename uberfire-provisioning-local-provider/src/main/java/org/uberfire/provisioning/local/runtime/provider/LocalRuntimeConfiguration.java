@@ -18,9 +18,6 @@ package org.uberfire.provisioning.local.runtime.provider;
 
 import org.uberfire.provisioning.runtime.base.BaseRuntimeConfiguration;
 
-/**
- * @author salaboy
- */
 public class LocalRuntimeConfiguration extends BaseRuntimeConfiguration {
 
     public void setJar( String jar ) {

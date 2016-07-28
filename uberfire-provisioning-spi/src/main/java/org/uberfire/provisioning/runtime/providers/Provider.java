@@ -15,12 +15,17 @@
  */
 package org.uberfire.provisioning.runtime.providers;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import static com.fasterxml.jackson.annotation.JsonTypeInfo.As.WRAPPER_OBJECT;
+import static com.fasterxml.jackson.annotation.JsonTypeInfo.Id.CLASS;
+
 /**
  * <p>
  * A provider represent a running entity that allows us to provision new
  * runtimes. Such as: Docker, Kubernetes, Application Servers (Wildfly, Tomcat,
  * etc)
  */
+@JsonTypeInfo( use = CLASS, include = WRAPPER_OBJECT )
 public interface Provider {
 
     String getName();

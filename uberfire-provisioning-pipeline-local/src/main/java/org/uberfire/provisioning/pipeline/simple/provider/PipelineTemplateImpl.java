@@ -28,6 +28,9 @@ public class PipelineTemplateImpl implements PipelineTemplate {
 
     private List<StageDefinition> stages;
 
+    public PipelineTemplateImpl() {
+    }
+    
     @Override
     public String getPrefix() {
         return prefix;
