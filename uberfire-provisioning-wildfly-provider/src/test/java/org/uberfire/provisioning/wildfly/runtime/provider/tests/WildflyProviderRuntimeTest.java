@@ -16,14 +16,7 @@
 
 package org.uberfire.provisioning.wildfly.runtime.provider.tests;
 
-import javax.enterprise.inject.Any;
-import javax.enterprise.inject.Instance;
-import javax.inject.Inject;
-
-import org.jboss.arquillian.container.test.api.Deployment;
-import org.jboss.arquillian.junit.Arquillian;
-import org.jboss.shrinkwrap.api.spec.JavaArchive;
-import org.junit.Ignore;
+import java.io.File;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.uberfire.provisioning.exceptions.ProvisioningException;
@@ -32,98 +25,76 @@ import org.uberfire.provisioning.runtime.RuntimeConfiguration;
 import org.uberfire.provisioning.runtime.base.BaseRuntimeConfiguration;
 import org.uberfire.provisioning.runtime.providers.ProviderType;
 import org.uberfire.provisioning.wildfly.runtime.provider.base.WildflyProviderConfiguration;
-import org.uberfire.provisioning.wildfly.runtime.provider.base.WildflyRuntime;
-import org.uberfire.provisioning.wildfly.runtime.provider.base.WildflyRuntimeConfiguration;
 import org.uberfire.provisioning.wildfly.runtime.provider.wildly10.Wildfly10Provider;
-import org.uberfire.provisioning.wildfly.runtime.provider.wildly10.Wildfly10ProviderType;
 
 import static java.util.logging.Level.*;
 import static java.util.logging.Logger.*;
-import static org.jboss.shrinkwrap.api.ShrinkWrap.*;
-import static org.jboss.shrinkwrap.api.asset.EmptyAsset.*;
+import org.arquillian.cube.CubeController;
+import org.arquillian.cube.HostIp;
+import org.arquillian.cube.requirement.ArquillianConditionalRunner;
+import org.jboss.arquillian.junit.InSequence;
+import org.jboss.arquillian.test.api.ArquillianResource;
+import org.arquillian.cube.docker.impl.requirement.RequiresDockerMachine;
+import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.asset.EmptyAsset;
+import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.jboss.shrinkwrap.impl.base.exporter.zip.ZipExporterImpl;
 import static org.junit.Assert.*;
 import org.uberfire.provisioning.wildfly.runtime.provider.base.WildflyRuntimeService;
 import org.uberfire.provisioning.wildfly.runtime.provider.wildly10.Wildfly10ProviderService;
+import org.uberfire.provisioning.wildfly.runtime.provider.wildly10.Wildfly10ProviderType;
 
-@RunWith( Arquillian.class )
+@RunWith( ArquillianConditionalRunner.class )
+@RequiresDockerMachine( name = "default" )
 public class WildflyProviderRuntimeTest {
 
-    @Deployment
-    public static JavaArchive createDeployment() {
+    private static final String CONTAINER = "swarm";
 
-        JavaArchive jar = create( JavaArchive.class )
-                .addClass( Wildfly10ProviderType.class )
-                .addClass( Wildfly10Provider.class )
-                .addClass( WildflyRuntime.class )
-                .addAsManifestResource( INSTANCE, "beans.xml" );
-        //System.out.println( jar.toString( true ) );
-        return jar;
-    }
+    @HostIp
+    String ip;
 
-    @Inject
-    @Any
-    private Instance<ProviderType> providerTypes;
+    @ArquillianResource
+    private CubeController cc;
 
-    public WildflyProviderRuntimeTest() {
+    @Test
+    @InSequence( 0 )
+    public void shouldBeAbleToInjectControllerTest() {
+        assertNotNull( cc );
     }
 
     @Test
-    public void providerTypeRegisteredTest() {
-        int i = 0;
-        for ( ProviderType pt : providerTypes ) {
-            assertEquals( "wildfly", pt.getProviderTypeName() );
-            assertEquals( "10.0.0", pt.getVersion() );
-            i++;
-        }
-        assertEquals( 1, i );
-
+    @InSequence( 1 )
+    public void shouldBeAbleToCreateAndStartTest() {
+        cc.create( CONTAINER );
+        cc.start( CONTAINER );
     }
 
     @Test
-    public void newWildflyProviderWithoutWildflyRunningTest() {
-        ProviderType wildlyProviderType = providerTypes.iterator().next();
-        WildflyProviderConfiguration config = new WildflyProviderConfiguration( "wildfly @ 9990" );
-
-        config.setHost( "localhost" );
-        config.setManagementPort( "9990" );
-        config.setUser( "someuser" );
-        config.setPassword( "somepassword" );
-
-        Wildfly10Provider wildflyProvider = new Wildfly10Provider( config, wildlyProviderType );
-        Wildfly10ProviderService providerService = new Wildfly10ProviderService( wildflyProvider );
-
-        assertNotNull( providerService.getWildfly() );
-        WildflyRuntimeConfiguration runtimeConfig = new WildflyRuntimeConfiguration();
-        runtimeConfig.setWarPath( "" );
-
-        Runtime newRuntime = null;
-
-        try {
-            newRuntime = providerService.create( runtimeConfig );
-        } catch ( Exception ex ) {
-            assertTrue( ex instanceof ProvisioningException );
-        }
-
-    }
-
-    @Test
-    @Ignore
-    public void newWildflyProviderWithWildflyRunningTest() {
-        ProviderType wildflyProviderType = providerTypes.iterator().next();
+    @InSequence( 2 )
+    public void newWildflyProviderWithWildflyRunningTest() throws InterruptedException {
+        System.out.println( " IP: " + ip );
+        ProviderType wildflyProviderType = new Wildfly10ProviderType();
 
         WildflyProviderConfiguration config = new WildflyProviderConfiguration( "wildfly @ 9990" );
 
-        config.setHost( "localhost" );
+        config.setHost( ip );
         config.setManagementPort( "9990" );
+        config.setPort( "8080" );
         config.setUser( "admin" );
-        config.setPassword( "admin" );
+        config.setPassword( "Admin#70365" );
 
         Wildfly10Provider wildflyProvider = new Wildfly10Provider( config, wildflyProviderType );
         Wildfly10ProviderService providerService = new Wildfly10ProviderService( wildflyProvider );
 
         assertNotNull( providerService.getWildfly() );
         RuntimeConfiguration runtimeConfig = new BaseRuntimeConfiguration();
-        runtimeConfig.getProperties().put( "warPath", "../extras/sample-war/target/sample-war-1.0-SNAPSHOT.war" );
+
+        WebArchive archive = ShrinkWrap.create( WebArchive.class, "test.war" );
+        archive.addAsWebInfResource( EmptyAsset.INSTANCE, "beans.xml" );
+
+        new ZipExporterImpl( archive ).exportTo( new File( archive.getName() ), true );
+
+        runtimeConfig.getProperties().put( "warPath", archive.getName() );
 
         Runtime newRuntime = null;
 
@@ -142,7 +113,15 @@ public class WildflyProviderRuntimeTest {
 
         newRuntime = wildflyRuntimeService.getRuntime();
 
+        assertNotNull( newRuntime );
         // TODO: check state and info
+    }
+
+    @Test
+    @InSequence( 3 )
+    public void shouldBeAbleToStopAndDestroyTest() {
+        cc.stop( CONTAINER );
+        cc.destroy( CONTAINER );
     }
 
 }

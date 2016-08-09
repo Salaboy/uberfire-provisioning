@@ -56,7 +56,12 @@
                
             </exclusions>
         </dependency>
-        
+        <dependency>
+			<groupId>javax.ws.rs</groupId>
+			<artifactId>javax.ws.rs-api</artifactId>
+			<version>2.0</version>
+			<scope>provided</scope>
+		</dependency>
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
@@ -89,24 +94,6 @@
         <dependency>
             <groupId>org.jboss.arquillian.junit</groupId>
             <artifactId>arquillian-junit-container</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.arquillian.extension</groupId>
-            <artifactId>arquillian-rest-client-api</artifactId>
-            <version>1.0.0.Final-SNAPSHOT</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.arquillian.extension</groupId>
-            <artifactId>arquillian-rest-client-impl-3x</artifactId>
-            <version>1.0.0.Final-SNAPSHOT</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-jackson-provider</artifactId>
-            <version>${version.resteasy.client}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -161,7 +148,7 @@
                                     <exec>
                                         <arg>java</arg>
                                         <arg>-jar</arg>
-                                        <arg>/opt/wildfly-swarm/uberfire-provisioning-services.jar</arg>
+                                        <arg>/opt/wildfly-swarm/uberfire-provisioning-distribution.jar</arg>
                                     </exec>
                                 </entryPoint>
                                 <assembly>
@@ -170,9 +157,9 @@
                                             <dependencySet>
                                                 <useProjectAttachments>true</useProjectAttachments>
                                                 <includes>
-                                                    <include>org.uberfire.provisioning:uberfire-provisioning-services-swarm:jar:swarm</include>
+                                                    <include>org.uberfire.provisioning:uberfire-provisioning-distribution:jar:swarm</include>
                                                 </includes>
-                                                <outputFileNameMapping>uberfire-provisioning-services.jar</outputFileNameMapping>
+                                                <outputFileNameMapping>uberfire-provisioning-distribution.jar</outputFileNameMapping>
                                             </dependencySet>
                                         </dependencySets>
                                         <fileSets>

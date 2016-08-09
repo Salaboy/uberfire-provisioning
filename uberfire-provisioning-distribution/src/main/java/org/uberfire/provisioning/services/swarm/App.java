@@ -30,7 +30,6 @@ public class App {
 
         JAXRSArchive deployment = ShrinkWrap.create( JAXRSArchive.class );
         deployment.setContextRoot( "/api" );
-
         deployment.addAllDependencies();
 
         container.deploy( deployment );

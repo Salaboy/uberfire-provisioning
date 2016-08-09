@@ -16,10 +16,6 @@
 
 package org.uberfire.provisioning.wildfly.runtime.extras.tests;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.uberfire.provisioning.wildfly.runtime.provider.extras.Wildfly10RemoteClient;
@@ -29,25 +25,7 @@ import static java.lang.System.*;
 
 public class Wildfly10RemoteDeploymentTest {
 
-    public Wildfly10RemoteDeploymentTest() {
-    }
-
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
-    }
-
-    @Before
-    public void setUp() {
-    }
-
-    @After
-    public void tearDown() {
-    }
-
+    
     @Test
     @Ignore
     /*
